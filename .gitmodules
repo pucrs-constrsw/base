@@ -1,0 +1,30 @@
+[submodule "backend/oauth"]
+	path = backend/oauth
+	url = https://github.com/pucrs-constrsw-2025-1/oauth.git
+[submodule "backend/classes"]
+	path = backend/classes
+	url = https://github.com/pucrs-constrsw-2025-1/classes.git
+[submodule "backend/lessons"]
+	path = backend/lessons
+	url = https://github.com/pucrs-constrsw-2025-1/lessons.git
+[submodule "backend/professors"]
+	path = backend/professors
+	url = https://github.com/pucrs-constrsw-2025-1/professors.git
+[submodule "backend/courses"]
+	path = backend/courses
+	url = https://github.com/pucrs-constrsw-2025-1/courses.git
+[submodule "backend/reservations"]
+	path = backend/reservations
+	url = https://github.com/pucrs-constrsw-2025-1/reservations.git
+[submodule "backend/resources"]
+	path = backend/resources
+	url = https://github.com/pucrs-constrsw-2025-1/resources.git
+[submodule "backend/rooms"]
+	path = backend/rooms
+	url = https://github.com/pucrs-constrsw-2025-1/rooms.git
+[submodule "backend/students"]
+	path = backend/students
+	url = https://github.com/pucrs-constrsw-2025-1/students.git
+[submodule "frontend"]
+	path = frontend
+	url = https://github.com/pucrs-constrsw-2025-1/frontend.git
