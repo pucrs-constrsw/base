@@ -34,7 +34,7 @@ services:
     ports:
       - ${KEYCLOAK_EXTERNAL_PORT}:${KEYCLOAK_INTERNAL_PORT}
     healthcheck:
-      TEST: [ "CMD-SHELL", "curl -f ${KEYCLOAK_INTERNAL_HOST}:${KEYCLOAK_INTERNAL_PORT}/health" ]
+      test: [ "cmd-shell", "curl -f ${KEYCLOAK_INTERNAL_HOST}:${KEYCLOAK_INTERNAL_PORT}/health" ]
       start_period: 60s
       interval: 30s
       timeout: 10s
@@ -145,7 +145,7 @@ services:
   #   networks:
   #     - constrsw
   #   ports:
-  #     - ${CLASSES_INTERNAL_DEBUG_PORT}:${CLASSES_INTERNAL_DEBUG_PORT}
+  #     - ${CLASSES_EXTERNAL_DEBUG_PORT}:${CLASSES_INTERNAL_DEBUG_PORT}
   #   depends_on:
   #     postgresql:
   #       condition: service_healthy
@@ -184,7 +184,7 @@ services:
   #   networks:
   #     - constrsw
   #   ports:
-  #     - ${COURSES_INTERNAL_DEBUG_PORT}:${COURSES_INTERNAL_DEBUG_PORT}
+  #     - ${COURSES_EXTERNAL_DEBUG_PORT}:${COURSES_INTERNAL_DEBUG_PORT}
   #   depends_on:
   #     postgresql:
   #       condition: service_healthy
@@ -223,7 +223,7 @@ services:
   #   networks:
   #     - constrsw
   #   ports:
-  #     - ${LESSONS_INTERNAL_DEBUG_PORT}:${LESSONS_INTERNAL_DEBUG_PORT}
+  #     - ${LESSONS_EXTERNAL_DEBUG_PORT}:${LESSONS_INTERNAL_DEBUG_PORT}
   #   depends_on:
   #     postgresql:
   #       condition: service_healthy
@@ -262,7 +262,7 @@ services:
   #   networks:
   #     - constrsw
   #   ports:
-  #     - ${PROFESSORS_INTERNAL_DEBUG_PORT}:${PROFESSORS_INTERNAL_DEBUG_PORT}
+  #     - ${PROFESSORS_EXTERNAL_DEBUG_PORT}:${PROFESSORS_INTERNAL_DEBUG_PORT}
   #   depends_on:
   #     postgresql:
   #       condition: service_healthy
@@ -301,7 +301,7 @@ services:
   #   networks:
   #     - constrsw
   #   ports:
-  #     - ${RESERVATIONS_INTERNAL_DEBUG_PORT}:${RESERVATIONS_INTERNAL_DEBUG_PORT}
+  #     - ${RESERVATIONS_EXTERNAL_DEBUG_PORT}:${RESERVATIONS_INTERNAL_DEBUG_PORT}
   #   depends_on:
   #     postgresql:
   #       condition: service_healthy
@@ -340,7 +340,7 @@ services:
   #   networks:
   #     - constrsw
   #   ports:
-  #     - ${RESOURCES_INTERNAL_DEBUG_PORT}:${RESOURCES_INTERNAL_DEBUG_PORT}
+  #     - ${RESOURCES_EXTERNAL_DEBUG_PORT}:${RESOURCES_INTERNAL_DEBUG_PORT}
   #   depends_on:
   #     postgresql:
   #       condition: service_healthy
@@ -379,7 +379,7 @@ services:
   #   networks:
   #     - constrsw
   #   ports:
-  #     - ${ROOMS_INTERNAL_DEBUG_PORT}:${ROOMS_INTERNAL_DEBUG_PORT}
+  #     - ${ROOMS_EXTERNAL_DEBUG_PORT}:${ROOMS_INTERNAL_DEBUG_PORT}
   #   depends_on:
   #     postgresql:
   #       condition: service_healthy
@@ -418,7 +418,7 @@ services:
   #   networks:
   #     - constrsw
   #   ports:
-  #     - ${STUDENTS_INTERNAL_DEBUG_PORT}:${STUDENTS_INTERNAL_DEBUG_PORT}
+  #     - ${STUDENTS_EXTERNAL_DEBUG_PORT}:${STUDENTS_INTERNAL_DEBUG_PORT}
   #   depends_on:
   #     postgresql:
   #       condition: service_healthy
@@ -508,7 +508,7 @@ services:
   #   image: constrsw/frontend
   #   ports:
   #     - ${FRONTEND_EXTERNAL_PORT}:${FRONTEND_INTERNAL_PORT}
-  #     - ${FRONTEND_DEBUG_EXTERNAL_PORT}:${FRONTEND_DEBUG_INTERNAL_PORT}
+  #     - ${FRONTEND_EXTERNAL_DEBUG_PORT}:${FRONTEND_INTERNAL_DEBUG_PORT}
   #   networks:
   #     - constrsw
   #   depends_on:
