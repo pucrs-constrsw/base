@@ -60,10 +60,11 @@ services:
          condition: service_healthy
     restart: always
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://${OAUTH_INTERNAL_HOST}:${OAUTH_INTERNAL_PORT}/health"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      test: ["CMD-SHELL", "curl -f ${OAUTH_INTERNAL_HOST}:${OAUTH_INTERNAL_PORT}/health"]
+      start_period: 60s
+      interval: 30s
+      timeout: 10s
+      retries: 1
   # # PostgreSQL
   # postgresql:
   #   container_name: postgresql
