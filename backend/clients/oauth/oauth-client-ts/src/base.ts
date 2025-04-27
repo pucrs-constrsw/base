@@ -13,13 +13,13 @@
  */
 
 
-import type { Configuration } from './configuration';
+import type { Configuration } from './configuration.ts';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 
-export const BASE_PATH = "http://localhost:8080".replace(/\/+$/, "");
+export const BASE_PATH = `http://${process.env.OAUTH_HOST}:${process.env.OAUTH_PORT}`.replace(/\/+$/, "");
 
 /**
  *
@@ -48,6 +48,7 @@ export interface RequestArgs {
  * @class BaseAPI
  */
 export class BaseAPI {
+    //generate a getter for the configuration
     protected configuration: Configuration | undefined;
 
     constructor(configuration?: Configuration, protected basePath: string = BASE_PATH, protected axios: AxiosInstance = globalAxios) {
@@ -56,7 +57,7 @@ export class BaseAPI {
             this.basePath = configuration.basePath ?? basePath;
         }
     }
-};
+}
 
 /**
  *

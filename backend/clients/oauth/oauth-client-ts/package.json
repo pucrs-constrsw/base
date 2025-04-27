@@ -1,14 +1,16 @@
 {
   "name": "oauth-client-ts",
   "version": "1.0.0",
-  "description": "Axios API client for an oauth API",
-  "main": "index.js",
+  "type": "module",
+  "description": "Axios API client for the oauth service",
   "scripts": {
-    "run-example": "node example.ts"
+    "run-example": "tsx src/example.ts"
   },
-  "author": "Santi Albo",
-  "license": "ISC",
   "dependencies": {
     "axios": "^0.21.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.2",
+    "tsx": "^4.19.3"
   }
 }

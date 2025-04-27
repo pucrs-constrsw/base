@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
+    "target": "esnext",
+    "module": "ESNext",
+    "moduleResolution": "nodenext",
+    "allowImportingTsExtensions": true,
     "lib": ["es6"],
     "allowJs": true,
     "outDir": "dist",
