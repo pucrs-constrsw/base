@@ -36,12 +36,6 @@ public class OauthClientApplication implements ApplicationRunner
 		SpringApplication.run(OauthClientApplication.class, args);
 	}
 
-	private final LoginApiClient loginApiClient;
-	private final UsersApiClient usersApiClient;
-	private final RolesApiClient rolesApiClient;
-
-	private final Logger logger = LoggerFactory.getLogger(OauthClientApplication.class);
-
 	@Override
 	public void run(ApplicationArguments args) throws Exception
 	{
@@ -53,4 +47,10 @@ public class OauthClientApplication implements ApplicationRunner
 		logger.info("Users: {}", users.getBody());
 		logger.info("Roles: {}", roles.getBody());
 	}
+
+	private final LoginApiClient loginApiClient;
+	private final UsersApiClient usersApiClient;
+	private final RolesApiClient rolesApiClient;
+
+	private final Logger logger = LoggerFactory.getLogger(OauthClientApplication.class);
 }
