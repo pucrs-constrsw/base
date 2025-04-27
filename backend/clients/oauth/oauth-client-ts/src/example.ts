@@ -7,7 +7,7 @@ const login = await AuthenticationControllerApiFp().login({email: "admin@pucrs.b
 const getUsers = await UsersControllerApiFp().getUsers(undefined, undefined, undefined, undefined, undefined)
 const getRoles = await RolesControllerApiFp().getRoles()
 
-const accessToken = await login(axios.create())
+const accessToken = await login()
 
 const authenticatedClient = axios.create({
     headers: {
@@ -16,7 +16,18 @@ const authenticatedClient = axios.create({
 })
 
 console.log("users: ");
-console.log((await getUsers(authenticatedClient)).data);
+
+const [users, roles] = await Promise.allSettled([getUsers(authenticatedClient), getRoles(authenticatedClient)])
+
+if (users.status === "rejected") {
+    throw new Error(`error getting users: ${users.reason}`)
+}
+
+if (roles.status === "rejected") {
+    throw new Error(`error getting roles: ${roles.reason}`)
+}
+
+console.log(users.value.data);
 
 console.log("roles: ")
-console.log((await getRoles(authenticatedClient)).data);
+console.log(roles.value.data);
