@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "attach",
+            "name": "Debug OAuth Service",
+            "address": "localhost",
+            "port": 8101,
+            "localRoot": "${workspaceFolder}/backend/oauth",
+            "remoteRoot": "/app",
+            "restart": true,
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "outFiles": [
+                "${workspaceFolder}/backend/oauth/dist/**/*.js"
+            ],
+            "sourceMaps": true,
+            "resolveSourceMapLocations": [
+                "${workspaceFolder}/backend/oauth/**",
+                "!**/node_modules/**"
+            ]
+        }
+    ]
+} 
