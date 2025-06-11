@@ -3,8 +3,8 @@
     "configurations": [
         {
             "type": "node",
+            "name": "OAuth Service",
             "request": "attach",
-            "name": "Debug OAuth Service",
             "address": "localhost",
             "port": 8101,
             "localRoot": "${workspaceFolder}/backend/oauth",
@@ -21,6 +21,18 @@
                 "${workspaceFolder}/backend/oauth/**",
                 "!**/node_modules/**"
             ]
+        },
+        {
+            "type": "java",
+            "name": "Resources Service",
+            "request": "attach",
+            "hostName": "localhost",
+            "port": 8107,
+            "projectName": "constrsw/resources",
+            "sourcePaths": [
+                "${workspaceFolder}/backend/resources/src/main/java"
+            ],
+            "vmArgs": "-Xms256m -Xmx512m -XX:+UseContainerSupport -Djava.security.egd=file:/dev/./urandom"
         }
     ]
-} 
+}
