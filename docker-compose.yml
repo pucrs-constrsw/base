@@ -32,7 +32,7 @@ services:
     ports:
       - ${KEYCLOAK_EXTERNAL_CONSOLE_PORT}:${KEYCLOAK_INTERNAL_CONSOLE_PORT}
     healthcheck:
-      test: [ "CMD-SHELL", "curl -f ${KEYCLOAK_INTERNAL_HOST}:${KEYCLOAK_API_PORT}/health" ]
+      test: [ "CMD-SHELL", "curl -f ${KEYCLOAK_INTERNAL_HOST}:${KEYCLOAK_INTERNAL_API_PORT}/health" ]
       start_period: 110s
       interval: 10s
       timeout: 10s
@@ -103,7 +103,7 @@ services:
       target: development
     image: constrsw/oauth
     environment:
-      - KEYCLOAK_BASE_URL=${KEYCLOAK_INTERNAL_PROTOCOL}://${KEYCLOAK_INTERNAL_HOST}:${KEYCLOAK_API_PORT}
+      - KEYCLOAK_BASE_URL=${KEYCLOAK_INTERNAL_PROTOCOL}://${KEYCLOAK_INTERNAL_HOST}:${KEYCLOAK_INTERNAL_API_PORT}
       - KEYCLOAK_REALM=${KEYCLOAK_REALM}
       - KEYCLOAK_CLIENT_ID=${KEYCLOAK_CLIENT_ID}
       - KEYCLOAK_CLIENT_SECRET=${KEYCLOAK_CLIENT_SECRET}
@@ -190,6 +190,7 @@ services:
   #   networks:
   #     - constrsw
   #   ports:
+  #     - ${COURSES_EXTERNAL_API_PORT}:${COURSES_INTERNAL_API_PORT}
   #     - ${COURSES_EXTERNAL_DEBUG_PORT}:${COURSES_INTERNAL_DEBUG_PORT}
   #   depends_on:
   #     postgresql:
@@ -224,6 +225,7 @@ services:
   #   networks:
   #     - constrsw
   #   ports:
+  #     - ${LESSONS_EXTERNAL_API_PORT}:${LESSONS_INTERNAL_API_PORT}
   #     - ${LESSONS_EXTERNAL_DEBUG_PORT}:${LESSONS_INTERNAL_DEBUG_PORT}
   #   depends_on:
   #     postgresql:
@@ -258,6 +260,7 @@ services:
   #   networks:
   #     - constrsw
   #   ports:
+  #     - ${PROFESSORS_EXTERNAL_API_PORT}:${PROFESSORS_INTERNAL_API_PORT}
   #     - ${PROFESSORS_EXTERNAL_DEBUG_PORT}:${PROFESSORS_INTERNAL_DEBUG_PORT}
   #   depends_on:
   #     postgresql:
@@ -292,6 +295,7 @@ services:
   #   networks:
   #     - constrsw
   #   ports:
+  #     - ${RESERVATIONS_EXTERNAL_API_PORT}:${RESERVATIONS_INTERNAL_API_PORT}
   #     - ${RESERVATIONS_EXTERNAL_DEBUG_PORT}:${RESERVATIONS_INTERNAL_DEBUG_PORT}
   #   depends_on:
   #     postgresql:
@@ -299,7 +303,7 @@ services:
   #     mongodb:
   #       condition: service_healthy
   #   healthcheck:
-  #     test: [ "CMD-SHELL", "curl -f http://${RESERVATIONS_INTERNAL_HOST}:${RESERVATIONS_INTERNAL_PORT}/health" ]
+  #     test: [ "CMD-SHELL", "curl -f http://${RESERVATIONS_INTERNAL_HOST}:${RESERVATIONS_INTERNAL_API_PORT}/health" ]
   #     start_period: 80s
   #     interval: 10s
   #     timeout: 10s
@@ -326,6 +330,7 @@ services:
     networks:
       - constrsw
     ports:
+      - ${RESOURCES_EXTERNAL_API_PORT}:${RESOURCES_INTERNAL_API_PORT}
       - ${RESOURCES_EXTERNAL_DEBUG_PORT}:${RESOURCES_INTERNAL_DEBUG_PORT}
     depends_on:
       postgresql:
@@ -333,7 +338,7 @@ services:
       mongodb:
         condition: service_healthy
     healthcheck:
-      test: [ "CMD-SHELL", "curl -f ${RESOURCES_INTERNAL_PROTOCOL}://${RESOURCES_INTERNAL_HOST}:${RESOURCES_INTERNAL_PORT}/health" ]
+      test: [ "CMD-SHELL", "curl -f ${RESOURCES_INTERNAL_PROTOCOL}://${RESOURCES_INTERNAL_HOST}:${RESOURCES_INTERNAL_API_PORT}/health" ]
       start_period: 80s
       interval: 10s
       timeout: 10s
@@ -360,6 +365,7 @@ services:
   #   networks:
   #     - constrsw
   #   ports:
+  #     - ${ROOMS_EXTERNAL_API_PORT}:${ROOMS_INTERNAL_API_PORT}
   #     - ${ROOMS_EXTERNAL_DEBUG_PORT}:${ROOMS_INTERNAL_DEBUG_PORT}
   #   depends_on:
   #     postgresql:
@@ -367,7 +373,7 @@ services:
   #     mongodb:
   #       condition: service_healthy
   #   healthcheck:
-  #     test: [ "CMD-SHELL", "curl -f http://${ROOMS_INTERNAL_HOST}:${ROOMS_INTERNAL_PORT}/health" ]
+  #     test: [ "CMD-SHELL", "curl -f http://${ROOMS_INTERNAL_HOST}:${ROOMS_INTERNAL_API_PORT}/health" ]
   #     start_period: 80s
   #     interval: 10s
   #     timeout: 10s
@@ -394,6 +400,7 @@ services:
   #   networks:
   #     - constrsw
   #   ports:
+  #     - ${STUDENTS_EXTERNAL_API_PORT}:${STUDENTS_INTERNAL_API_PORT}
   #     - ${STUDENTS_EXTERNAL_DEBUG_PORT}:${STUDENTS_INTERNAL_DEBUG_PORT}
   #   depends_on:
   #     postgresql:
@@ -401,7 +408,7 @@ services:
   #     mongodb:
   #       condition: service_healthy
   #   healthcheck:
-  #     test: [ "CMD-SHELL", "curl -f http://${STUDENTS_INTERNAL_HOST}:${STUDENTS_INTERNAL_PORT}/health" ]
+  #     test: [ "CMD-SHELL", "curl -f http://${STUDENTS_INTERNAL_HOST}:${STUDENTS_INTERNAL_API_PORT}/health" ]
   #     start_period: 80s
   #     interval: 10s
   #     timeout: 10s
@@ -414,13 +421,10 @@ services:
       dockerfile: Dockerfile
     image: constrsw/bff
     environment:
-      - BFF_NAME=${BFF_NAME}
-      - BFF_INTERNAL_PORT=${BFF_INTERNAL_PORT}
-      - BFF_INTERNAL_DEBUG_PORT=${BFF_INTERNAL_DEBUG_PORT}
       - OAUTH_INTERNAL_PROTOCOL=${OAUTH_INTERNAL_PROTOCOL}
-      - OAUTH_INTERNAL_PORT=${OAUTH_INTERNAL_API_PORT}
+      - OAUTH_INTERNAL_API_PORT=${OAUTH_INTERNAL_API_PORT}
       - OAUTH_INTERNAL_HOST=${OAUTH_INTERNAL_HOST}
-      - CLASSES_INTERNAL_PROTOCOL=${CLASSES_INTERNAL_PROTOCOL}
+  #    - CLASSES_INTERNAL_PROTOCOL=${CLASSES_INTERNAL_PROTOCOL}
   #     - CLASSES_INTERNAL_HOST=${CLASSES_INTERNAL_HOST}
   #     - CLASSES_INTERNAL_PORT=${CLASSES_INTERNAL_PORT}
   #     - COURSES_INTERNAL_HOST=${COURSES_INTERNAL_HOST}
@@ -437,7 +441,7 @@ services:
   #     - RESERVATIONS_INTERNAL_PORT=${RESERVATIONS_INTERNAL_PORT}
       - RESOURCES_INTERNAL_PROTOCOL=${RESOURCES_INTERNAL_PROTOCOL}
       - RESOURCES_INTERNAL_HOST=${RESOURCES_INTERNAL_HOST}
-      - RESOURCES_INTERNAL_PORT=${RESOURCES_INTERNAL_PORT}
+      - RESOURCES_INTERNAL_API_PORT=${RESOURCES_INTERNAL_API_PORT}
   #     - ROOMS_INTERNAL_PROTOCOL=${ROOMS_INTERNAL_PROTOCOL}
   #     - ROOMS_INTERNAL_HOST=${ROOMS_INTERNAL_HOST}
   #     - ROOMS_INTERNAL_PORT=${ROOMS_INTERNAL_PORT}
@@ -447,7 +451,7 @@ services:
     networks:
       - constrsw
     ports:
-      - ${BFF_EXTERNAL_PORT}:${BFF_INTERNAL_PORT}
+      - ${BFF_EXTERNAL_API_PORT}:${BFF_INTERNAL_API_PORT}
       - ${BFF_EXTERNAL_DEBUG_PORT}:${BFF_INTERNAL_DEBUG_PORT}
     depends_on:
       oauth:
@@ -469,7 +473,7 @@ services:
   #     # students:
   #     #   condition: service_healthy
     healthcheck:
-      test: [ "CMD-SHELL", "curl -f http://localhost:${BFF_INTERNAL_PORT}/health" ]
+      test: [ "CMD-SHELL", "curl -f http://localhost:${BFF_INTERNAL_API_PORT}/health" ]
       start_period: 90s
       interval: 10s
       timeout: 10s
