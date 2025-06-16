@@ -113,9 +113,13 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
+      - CLASSES_USERNAME=${CLASSES_MONGODB_USERNAME}
+      - CLASSES_PASSWORD=${CLASSES_MONGODB_PASSWORD}
+      - CLASSES_DATABASE=${CLASSES_MONGODB_DATABASE}
     volumes:
       # No terminal, criar o volume externo: docker volume create constrsw-mongodb-data
       - constrsw-mongodb-data:/data/mongodb
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js
     networks:
       - constrsw
     healthcheck:
@@ -127,39 +131,43 @@ services:
     restart: always
 # # Grupo 6 
   # # classes
-  # classes:
-  #   container_name: classes
-  #   build:
-  #     context: ./backend/classes/
-  #     dockerfile: Dockerfile
-  #   image: constrsw/classes
-  #   environment:
-  #     - POSTGRESQL_INTERNAL_HOST=${POSTGRESQL_INTERNAL_HOST}
-  #     - POSTGRESQL_INTERNAL_PORT=${POSTGRESQL_INTERNAL_PORT}
-  #     - POSTGRESQL_USERNAME=${POSTGRESQL_USERNAME}
-  #     - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
-  #     - POSTGRESQL_DB=classes
-  #     - MONGODB_INTERNAL_HOST=${MONGODB_INTERNAL_HOST}
-  #     - MONGODB_INTERNAL_PORT=${MONGODB_INTERNAL_PORT}
-  #     - MONGODB_USERNAME=${MONGODB_USERNAME}
-  #     - MONGODB_PASSWORD=${MONGODB_PASSWORD}
-  #     - MONGODB_DATABASE_NAME=classes
-  #   networks:
-  #     - constrsw
-  #   ports:
-  #     - ${CLASSES_EXTERNAL_API_PORT}:${CLASSES_INTERNAL_API_PORT}
-  #     - ${CLASSES_EXTERNAL_DEBUG_PORT}:${CLASSES_INTERNAL_DEBUG_PORT}
-  #   depends_on:
-  #     postgresql:
-  #       condition: service_healthy
-  #     mongodb:
-  #       condition: service_healthy
-  #   healthcheck:
-  #     test: [ "CMD-SHELL", "curl -f http://${CLASSES_INTERNAL_HOST}:${CLASSES_INTERNAL_PORT}/health" ]
-  #     start_period: 80s
-  #     interval: 10s
-  #     timeout: 10s
-  #     retries: 10
+  classes:
+     container_name: classes
+     build:
+       context: ./backend/classes/
+       dockerfile: Dockerfile
+     image: constrsw/classes
+     environment:
+       - POSTGRESQL_INTERNAL_HOST=${POSTGRESQL_INTERNAL_HOST}
+       - POSTGRESQL_INTERNAL_PORT=${POSTGRESQL_INTERNAL_PORT}
+       - POSTGRESQL_USERNAME=${POSTGRESQL_USERNAME}
+       - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
+       - POSTGRESQL_DB=classes
+       - MONGODB_INTERNAL_HOST=${MONGODB_INTERNAL_HOST}
+       - MONGODB_INTERNAL_PORT=${MONGODB_INTERNAL_PORT}
+       - MONGODB_USERNAME=${CLASSES_MONGODB_USERNAME}
+       - MONGODB_PASSWORD=${CLASSES_MONGODB_PASSWORD}
+       - MONGODB_DATABASE_NAME=${CLASSES_MONGODB_DATABASE}
+       - OAUTH_INTERNAL_PROTOCOL=${OAUTH_INTERNAL_PROTOCOL}
+       - OAUTH_INTERNAL_HOST=${OAUTH_INTERNAL_HOST}
+       - OAUTH_INTERNAL_PORT=${OAUTH_INTERNAL_API_PORT}
+       - CLASSES_PORT=${CLASSES_INTERNAL_API_PORT}
+     networks:
+       - constrsw
+     ports:
+       - ${CLASSES_EXTERNAL_DEBUG_PORT}:${CLASSES_INTERNAL_DEBUG_PORT}
+       - ${CLASSES_EXTERNAL_API_PORT}:${CLASSES_INTERNAL_API_PORT}
+     depends_on:
+       postgresql:
+         condition: service_healthy
+       mongodb:
+         condition: service_healthy
+     healthcheck:
+       test: [ "CMD-SHELL", "curl -f http://${CLASSES_INTERNAL_HOST}:${CLASSES_INTERNAL_API_PORT}/health" ]
+       start_period: 80s
+       interval: 10s
+       timeout: 10s
+       retries: 10
   # # Grupo 3
   # # courses
   # courses:
