@@ -56,6 +56,9 @@ services:
       - OAUTH_INTERNAL_API_PORT=3000
       - OAUTH_EXTERNAL_API_PORT=8088
       - NODE_ENV=development
+      - FRONTEND_EXTERNAL_PROTOCOL=${FRONTEND_EXTERNAL_PROTOCOL}
+      - FRONTEND_EXTERNAL_HOST=${FRONTEND_EXTERNAL_HOST}
+      - FRONTEND_EXTERNAL_PORT=${FRONTEND_EXTERNAL_PORT}
     networks:
       - constrsw
     ports:
@@ -192,6 +195,9 @@ services:
       - COURSES_INTERNAL_HOST=${COURSES_INTERNAL_HOST}
       - COURSES_INTERNAL_API_PORT=${COURSES_INTERNAL_API_PORT}
       - COURSES_INTERNAL_DEBUG_PORT=${COURSES_INTERNAL_DEBUG_PORT}
+      - FRONTEND_EXTERNAL_PROTOCOL=${FRONTEND_EXTERNAL_PROTOCOL}
+      - FRONTEND_EXTERNAL_HOST=${FRONTEND_EXTERNAL_HOST}
+      - FRONTEND_EXTERNAL_PORT=${FRONTEND_EXTERNAL_PORT}
     networks:
       - constrsw
     ports:
@@ -485,6 +491,9 @@ services:
       - STUDENTS_INTERNAL_HOST=${STUDENTS_INTERNAL_HOST}
       - STUDENTS_INTERNAL_API_PORT=${STUDENTS_INTERNAL_API_PORT}
       - BFF_INTERNAL_API_PORT=${BFF_INTERNAL_API_PORT}
+      - FRONTEND_EXTERNAL_PROTOCOL=${FRONTEND_EXTERNAL_PROTOCOL}
+      - FRONTEND_EXTERNAL_HOST=${FRONTEND_EXTERNAL_HOST}
+      - FRONTEND_EXTERNAL_PORT=${FRONTEND_EXTERNAL_PORT}
     networks:
       - constrsw
     ports:
@@ -516,18 +525,27 @@ services:
       timeout: 10s
       retries: 10
     restart: always
-  # # Frontend
-  # frontend:
-  #   container_name: frontend
-  #   build:
-  #     context: ./frontend/
-  #     dockerfile: Dockerfile
-  #   image: constrsw/frontend
-  #   ports:
-  #     - ${FRONTEND_EXTERNAL_PORT}:${FRONTEND_INTERNAL_PORT}
-  #     - ${FRONTEND_EXTERNAL_DEBUG_PORT}:${FRONTEND_INTERNAL_DEBUG_PORT}
-  #   networks:
-  #     - constrsw
-  #   depends_on:
-  #     bff:
-  #       condition: service_healthy
+   # Frontend
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
+    environment:
+      - FRONTEND_EXTERNAL_HOST=${FRONTEND_EXTERNAL_HOST}
+      - FRONTEND_INTERNAL_PORT=80
+    image: constrsw/frontend
+    ports:
+      - "${FRONTEND_EXTERNAL_PORT}:80"
+    networks:
+      - constrsw
+    depends_on:
+      bff:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget --quiet --tries=1 --spider ${FRONTEND_INTERNAL_PROTOCOL}://${FRONTEND_INTERNAL_HOST}:${FRONTEND_INTERNAL_PORT}/nginx-health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: always
