@@ -377,44 +377,44 @@ services:
     restart: always
   # Grupo 4
   # rooms
-#  rooms:
-#    container_name: rooms
-#    build:
-#      context: ./backend/rooms/
-#      dockerfile: Dockerfile
-#    image: constrsw/rooms
-#    environment:
-#      - POSTGRESQL_INTERNAL_HOST=${POSTGRESQL_INTERNAL_HOST}
-#      - POSTGRESQL_INTERNAL_PORT=${POSTGRESQL_INTERNAL_PORT}
-#      - POSTGRESQL_USERNAME=${POSTGRESQL_USERNAME}
-#      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
-#      - POSTGRESQL_DB=rooms
-#      - MONGODB_INTERNAL_HOST=${MONGODB_INTERNAL_HOST}
-#      - MONGODB_INTERNAL_PORT=${MONGODB_INTERNAL_PORT}
-#      - MONGODB_USERNAME=${MONGODB_USERNAME}
-#      - MONGODB_PASSWORD=${MONGODB_PASSWORD}
-#      - MONGODB_DB=rooms
-#      - ROOMS_INTERNAL_PROTOCOL=${ROOMS_INTERNAL_PROTOCOL}
-#      - ROOMS_INTERNAL_HOST=${ROOMS_INTERNAL_HOST}
-#      - ROOMS_INTERNAL_API_PORT=${ROOMS_INTERNAL_API_PORT}
-#      - ROOMS_INTERNAL_DEBUG_PORT=${ROOMS_INTERNAL_DEBUG_PORT}
-#    networks:
-#      - constrsw
-#    ports:
-#      - ${ROOMS_EXTERNAL_API_PORT}:${ROOMS_INTERNAL_API_PORT}
-#      - ${ROOMS_EXTERNAL_DEBUG_PORT}:${ROOMS_INTERNAL_DEBUG_PORT}
-#    depends_on:
-#      postgresql:
-#        condition: service_healthy
-#      mongodb:
-#        condition: service_healthy
-#    healthcheck:
-#      test: [ "CMD-SHELL", "curl -f ${ROOMS_INTERNAL_PROTOCOL}://${ROOMS_INTERNAL_HOST}:${ROOMS_INTERNAL_API_PORT}/health" ]
-#      start_period: 80s
-#      interval: 10s
-#      timeout: 10s
-#      retries: 10
-#    restart: always
+  rooms:
+    container_name: rooms
+    build:
+      context: ./backend/rooms/
+      dockerfile: Dockerfile
+    image: constrsw/rooms
+    environment:
+      - POSTGRESQL_INTERNAL_HOST=${POSTGRESQL_INTERNAL_HOST}
+      - POSTGRESQL_INTERNAL_PORT=${POSTGRESQL_INTERNAL_PORT}
+      - POSTGRESQL_USERNAME=${POSTGRESQL_USERNAME}
+      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
+      - POSTGRESQL_DB=rooms
+      - MONGODB_INTERNAL_HOST=${MONGODB_INTERNAL_HOST}
+      - MONGODB_INTERNAL_PORT=${MONGODB_INTERNAL_PORT}
+      - MONGODB_USERNAME=${MONGODB_USERNAME}
+      - MONGODB_PASSWORD=${MONGODB_PASSWORD}
+      - MONGODB_DB=rooms
+      - ROOMS_INTERNAL_PROTOCOL=${ROOMS_INTERNAL_PROTOCOL}
+      - ROOMS_INTERNAL_HOST=${ROOMS_INTERNAL_HOST}
+      - ROOMS_INTERNAL_API_PORT=${ROOMS_INTERNAL_API_PORT}
+      - ROOMS_INTERNAL_DEBUG_PORT=${ROOMS_INTERNAL_DEBUG_PORT}
+    networks:
+      - constrsw
+    ports:
+      - ${ROOMS_EXTERNAL_API_PORT}:${ROOMS_INTERNAL_API_PORT}
+      - ${ROOMS_EXTERNAL_DEBUG_PORT}:${ROOMS_INTERNAL_DEBUG_PORT}
+    depends_on:
+      postgresql:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -f ${ROOMS_INTERNAL_PROTOCOL}://${ROOMS_INTERNAL_HOST}:${ROOMS_INTERNAL_API_PORT}/health" ]
+      start_period: 80s
+      interval: 10s
+      timeout: 10s
+      retries: 10
+    restart: always
   # Grupo 7
   # students
   students:
@@ -514,8 +514,8 @@ services:
         condition: service_healthy
       resources:
         condition: service_healthy
-#      rooms:
-#        condition: service_healthy
+      rooms:
+        condition: service_healthy
       students:
         condition: service_healthy
     healthcheck:
