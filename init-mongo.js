@@ -1,9 +1,19 @@
-db = db.getSiblingDB(process.env.CLASSES_DATABASE); // Replace 'your_database_name' with your actual database name
+// Script de inicialização do MongoDB
+// Cria databases para cada serviço usando o usuário admin existente
 
-db.createUser({
-    user: process.env.CLASSES_USERNAME, // Replace with your desired username
-    pwd: process.env.CLASSES_PASSWORD, // Replace with your desired password
-    roles: [
-        { role: 'readWrite', db: process.env.CLASSES_DATABASE } // Or other roles as needed
-    ]
-});
+// Para o serviço classes
+db = db.getSiblingDB('classes');
+// Cria uma coleção para garantir que o database seja criado
+db.createCollection('classes');
+
+// Para o serviço courses
+db = db.getSiblingDB('courses');
+db.createCollection('courses');
+
+// Para o serviço lessons
+db = db.getSiblingDB('lessons');
+db.createCollection('lessons');
+
+// Para o serviço professors
+db = db.getSiblingDB('professors');
+db.createCollection('professors');
