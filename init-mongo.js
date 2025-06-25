@@ -17,3 +17,22 @@ db.createCollection('lessons');
 // Para o serviço professors
 db = db.getSiblingDB('professors');
 db.createCollection('professors');
+
+// Para o serviço reservations
+db = db.getSiblingDB('reservations');
+db.createCollection('reservations');
+
+// Para o serviço resources
+db = db.getSiblingDB('resources');
+db.createCollection('resources');
+
+// Para o serviço rooms
+db = db.getSiblingDB('rooms');
+db.createCollection('rooms');
+
+// Para o serviço students
+db = db.getSiblingDB('students');
+db.createCollection('students');
+
+print('Todos os databases foram criados com sucesso!');
+print('Databases criados: classes, courses, lessons, professors, reservations, resources, rooms, students');
