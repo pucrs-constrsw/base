@@ -121,7 +121,6 @@ services:
     volumes:
       # No terminal, criar o volume externo: docker volume create constrsw-mongodb-data
       - constrsw-mongodb-data:/data/mongodb
-      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js
     networks:
       - constrsw
     ports:

@@ -13,5 +13,3 @@ WORKDIR /docker-entrypoint-initdb.d/
 COPY databases.sql /docker-entrypoint-initdb.d/
 COPY init-postgres.sh /docker-entrypoint-initdb.d/
 RUN chmod +x /docker-entrypoint-initdb.d/init-postgres.sh
-# USER postgres
-# CMD [ "psql",  "--file=databases.sql" ]
