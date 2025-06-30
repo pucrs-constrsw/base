@@ -1,9 +1,5 @@
 FROM prom/prometheus:latest
 
-# Instalar curl para health check
-USER root
-RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
-
 # Copiar configuração personalizada
 COPY prometheus.yml /etc/prometheus/prometheus.yml
 COPY alerts.yml /etc/prometheus/alerts.yml
