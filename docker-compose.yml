@@ -1,6 +1,9 @@
 networks:
     constrsw:
 volumes:
+    # No terminal, criar o volume externo: docker volume create constrsw-prometheus-data
+    constrsw-prometheus-data:
+        external: true
     # No terminal, criar o volume externo: docker volume create constrsw-keycloak-data
     constrsw-keycloak-data:
         external: true
@@ -11,6 +14,35 @@ volumes:
     constrsw-mongodb-data:
         external: true
 services:
+  # Prometheus
+  prometheus:
+    container_name: prometheus
+    build:
+      context: ./backend/utils/prometheus
+      dockerfile: Dockerfile
+    image: constrsw/prometheus
+    environment:
+      - PROMETHEUS_INTERNAL_HOST=${PROMETHEUS_INTERNAL_HOST}
+      - PROMETHEUS_EXTERNAL_HOST=${PROMETHEUS_EXTERNAL_HOST}
+      - PROMETHEUS_INTERNAL_PORT=${PROMETHEUS_INTERNAL_PORT}
+      - PROMETHEUS_EXTERNAL_PORT=${PROMETHEUS_EXTERNAL_PORT}
+    volumes:
+      - constrsw-prometheus-data:/prometheus
+      - ./backend/utils/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./backend/utils/prometheus/alerts.yml:/etc/prometheus/alerts.yml
+    networks:
+      - constrsw
+    ports:
+      - ${PROMETHEUS_EXTERNAL_PORT}:${PROMETHEUS_INTERNAL_PORT}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -f http://localhost:${PROMETHEUS_INTERNAL_PORT}/-/healthy" ]
+      start_period: 30s
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    restart: always
   # Keycloak
   keycloak:
     container_name: keycloak
@@ -21,6 +53,7 @@ services:
     command: start-dev --import-realm
     environment:
       - KC_HEALTH_ENABLED=${KC_HEALTH_ENABLED}
+      - KC_METRICS_ENABLED=${KC_METRICS_ENABLED}
       - KEYCLOAK_ADMIN=${KEYCLOAK_ADMIN}
       - KEYCLOAK_ADMIN_PASSWORD=${KEYCLOAK_ADMIN_PASSWORD}
     volumes:
@@ -549,3 +582,26 @@ services:
       retries: 3
       start_period: 40s
     restart: always
+  mongodb-exporter:
+    image: percona/mongodb_exporter:0.40.0
+    container_name: mongodb-exporter
+    environment:
+      - MONGODB_URI=mongodb://admin:a12345678@mongodb:27017
+    ports:
+      - "9216:9216"
+    networks:
+      - constrsw
+    depends_on:
+      - mongodb
+
+  postgresql-exporter:
+    image: prometheuscommunity/postgres-exporter:latest
+    container_name: postgresql-exporter
+    environment:
+      - DATA_SOURCE_NAME=postgresql://postgres:a12345678@postgresql:5432/postgres?sslmode=disable
+    ports:
+      - "9187:9187"
+    networks:
+      - constrsw
+    depends_on:
+      - postgresql
