@@ -9,12 +9,61 @@ Este projeto implementa uma API OAuth utilizando Keycloak como servidor de auten
 
 ---
 
+## 📚 Documentação do Projeto
+
+### 📋 Documentação Geral
+- [**ACTUATOR_README.md**](./ACTUATOR_README.md) - Configurações de Actuator e Health Checks para todos os serviços
+- [**DEBUG_README.md**](./DEBUG_README.md) - Configurações de Debug no VS Code para todos os serviços
+- [**POSTMAN_README.md**](./POSTMAN_README.md) - Collection do Postman com todos os endpoints e padrões de nomenclatura
+
+### 🏗️ Documentação dos Serviços
+
+#### Frontend
+- [**Frontend README.md**](./frontend/README.md) - Documentação do frontend React/TypeScript
+
+#### Backend Services
+
+##### Node.js/TypeScript
+- [**BFF README.md**](./backend/bff/README.md) - Backend for Frontend (Proxy/Aggregator)
+- [**OAuth README.md**](./backend/oauth/README.md) - Serviço de Autenticação e Autorização
+- [**Professors README.md**](./backend/professors/README.md) - Gestão de Professores
+
+##### Java/Spring Boot
+- [**Classes README.md**](./backend/classes/README.md) - Gestão de Classes e Turnos
+- [**Courses README.md**](./backend/courses/README.md) - Gestão de Cursos e Disciplinas
+- [**Reservations README.md**](./backend/reservations/README.md) - Sistema de Reservas
+- [**Resources README.md**](./backend/resources/README.md) - Gestão de Recursos
+- [**Rooms README.md**](./backend/rooms/README.md) - Gestão de Salas
+- [**Students README.md**](./backend/students/README.md) - Gestão de Estudantes
+
+##### Python/FastAPI
+- [**Lessons README.md**](./backend/lessons/README.md) - Gestão de Aulas e Frequência
+
+### 🧪 Testes e APIs
+
+#### Postman Collection
+- [**POSTMAN_README.md**](./POSTMAN_README.md) - Collection completa do Postman com todos os endpoints organizados por serviço
+  - **Arquivos incluídos:**
+    - [**constrsw-2025-1.postman_collection.json**](./constrsw-2025-1.postman_collection.json) - Collection com todos os endpoints
+    - [**constrsw-2025-1.postman_environment.json**](./constrsw-2025-1.postman_environment.json) - Environment com variáveis configuradas
+  - **Recursos:**
+    - Endpoints organizados por serviço (OAuth, BFF, Classes, Courses, etc.)
+    - Autenticação automática com tokens JWT
+    - Variáveis de ambiente pré-configuradas
+    - Padrões de nomenclatura padronizados
+    - Exemplos de payload para todos os endpoints
+    - Health checks e monitoramento
+
+---
+
 ## 📁 Estrutura do Projeto
 
 ```
 base/
 ├── docker-compose.yml                  # Orquestra Keycloak e OAuth containers
 ├── .env                                # Variáveis de ambiente
+├── ACTUATOR_README.md                  # Configurações de Actuator
+├── DEBUG_README.md                     # Configurações de Debug
 └── backend/
     └── oauth/                          # Projeto OAuth (submódulo)
         ├── Dockerfile                  # Dockerfile para API OAuth
@@ -211,8 +260,6 @@ Exemplos recentes:
   ```
 
 ---
-
-
 
 ## 📚 Recursos Adicionais
 

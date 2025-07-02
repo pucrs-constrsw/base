@@ -16,29 +16,29 @@ Este documento resume todos os arquivos ACTUATOR_README.md criados para cada ser
 - **Banco**: MongoDB
 - **Componentes Verificados**: Keycloak, System
 
-### 3. **Professors** (`backend/professors/ACTUATOR_README.md`) ✅
-- **Tecnologia**: Node.js/TypeScript/Express + Prometheus
-- **Porta da API**: 8185
-- **Banco**: MongoDB
-- **Componentes Verificados**: Database (TypeORM), System
-
-### 4. **Classes** (`backend/classes/ACTUATOR_README.md`) ✅
+### 3. **Classes** (`backend/classes/ACTUATOR_README.md`) ✅
 - **Tecnologia**: Java/Spring Boot Actuator
 - **Porta da API**: 8182
 - **Banco**: PostgreSQL + MongoDB
 - **Endpoints Customizados**: `/actuator/classes`, `/actuator/shifts`
 
-### 5. **Courses** (`backend/courses/ACTUATOR_README.md`) ✅
+### 4. **Courses** (`backend/courses/ACTUATOR_README.md`) ✅
 - **Tecnologia**: Java/Spring Boot Actuator
 - **Porta da API**: 8183
 - **Banco**: PostgreSQL
 - **Endpoints Customizados**: `/actuator/courses`, `/actuator/subjects`
 
-### 6. **Lessons** (`backend/lessons/ACTUATOR_README.md`) ✅
+### 5. **Lessons** (`backend/lessons/ACTUATOR_README.md`) ✅
 - **Tecnologia**: Python/FastAPI + Custom Health Checks
 - **Porta da API**: 8184
 - **Banco**: PostgreSQL
 - **Endpoints Customizados**: `/actuator/lessons`, `/actuator/attendance`
+
+### 6. **Professors** (`backend/professors/ACTUATOR_README.md`) ✅
+- **Tecnologia**: Node.js/TypeScript/Express + Prometheus
+- **Porta da API**: 8185
+- **Banco**: MongoDB
+- **Componentes Verificados**: Database (TypeORM), System
 
 ### 7. **Reservations** (`backend/reservations/ACTUATOR_README.md`) ✅
 - **Tecnologia**: Java/Spring Boot Actuator
@@ -148,11 +148,6 @@ Todos os serviços seguem o padrão de endpoints:
 - Métricas de autenticação
 - Status de conectividade
 
-### Professors
-- Verificação de banco de dados (TypeORM)
-- Métricas de professores
-- Status de disponibilidades
-
 ### Classes
 - Verificação de PostgreSQL e MongoDB
 - Status de classes e turnos
@@ -167,6 +162,11 @@ Todos os serviços seguem o padrão de endpoints:
 - Verificação de PostgreSQL
 - Status de aulas e frequência
 - Métricas de presença
+
+### Professors
+- Verificação de banco de dados (TypeORM)
+- Métricas de professores
+- Status de disponibilidades
 
 ### Reservations
 - Verificação de PostgreSQL e MongoDB
