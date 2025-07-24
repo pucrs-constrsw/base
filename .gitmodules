@@ -1,33 +1,33 @@
 [submodule "backend/oauth"]
 	path = backend/oauth
-	url = https://github.com/pucrs-constrsw-2025-1/oauth.git
+	url = https://github.com/pucrs-constrsw/oauth.git
 [submodule "backend/classes"]
 	path = backend/classes
-	url = https://github.com/pucrs-constrsw-2025-1/classes.git
+	url = https://github.com/pucrs-constrsw/classes.git
 [submodule "backend/lessons"]
 	path = backend/lessons
-	url = https://github.com/pucrs-constrsw-2025-1/lessons.git
+	url = https://github.com/pucrs-constrsw/lessons.git
 [submodule "backend/professors"]
 	path = backend/professors
-	url = https://github.com/pucrs-constrsw-2025-1/professors.git
+	url = https://github.com/pucrs-constrsw/professors.git
 [submodule "backend/courses"]
 	path = backend/courses
-	url = https://github.com/pucrs-constrsw-2025-1/courses.git
+	url = https://github.com/pucrs-constrsw/courses.git
 [submodule "backend/reservations"]
 	path = backend/reservations
-	url = https://github.com/pucrs-constrsw-2025-1/reservations.git
+	url = https://github.com/pucrs-constrsw/reservations.git
 [submodule "backend/resources"]
 	path = backend/resources
-	url = https://github.com/pucrs-constrsw-2025-1/resources.git
+	url = https://github.com/pucrs-constrsw/resources.git
 [submodule "backend/rooms"]
 	path = backend/rooms
-	url = https://github.com/pucrs-constrsw-2025-1/rooms.git
+	url = https://github.com/pucrs-constrsw/rooms.git
 [submodule "backend/students"]
 	path = backend/students
-	url = https://github.com/pucrs-constrsw-2025-1/students.git
+	url = https://github.com/pucrs-constrsw/students.git
 [submodule "backend/bff"]
 	path = backend/bff
-	url = https://github.com/pucrs-constrsw-2025-1/bff.git
+	url = https://github.com/pucrs-constrsw/bff.git
 [submodule "frontend"]
 	path = frontend
-	url = https://github.com/pucrs-constrsw-2025-1/campus-resource-access.git
+	url = https://github.com/pucrs-constrsw/frontend.git
